@@ -4,10 +4,10 @@ from flask import Flask, render_template, request, flash, redirect, url_for, abo
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_required, login_user, current_user, logout_user
 from flask_uploads import UploadSet, IMAGES, configure_uploads
-from flask.ext.moment import Moment
+from flask_moment import Moment
 from forms import WishForm, LoginForm
 from sqlalchemy import desc
-from flask.ext.heroku import Heroku
+from flask_heroku import Heroku
 
 
 basedir = os.path.abspath(os.path.dirname(__file__))
