@@ -32,7 +32,7 @@ class Wishes(db.Model):
     
     @staticmethod
     def new_wishes(page,POSTS_PER_PAGE):
-        return Wishes.query.filter(Wishes.wish_status != True).order_by(desc(Wishes.date)).paginate(page, POSTS_PER_PAGE, False)
+        return Wishes.query.filter(Wishes.wish_status == 0).order_by(desc(Wishes.date)).paginate(page, POSTS_PER_PAGE, False)
     @staticmethod
     def public_wishes(page,POSTS_PER_PAGE):
         return Wishes.query.filter(Wishes.wish_status != 1 and Wishes.user == current_user).order_by(desc(Wishes.date)).paginate(page, POSTS_PER_PAGE, False)
