@@ -70,7 +70,7 @@ def newwish():
         db.session.add(wishitem)
         db.session.commit()
         flash("stored wish '{}'" .format(title))
-        return redirect(url_for('index'))
+        return redirect(url_for('user', username=current_user.username))
     return render_template('wishform.html', form = form, heading = "Create a New Wish")
 
 
