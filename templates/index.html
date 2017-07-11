@@ -1,0 +1,121 @@
+{% extends "base.html" %} {% block content %} {% block css %}
+<style>
+    img {
+        width: 80px;
+        border-radius: 20px;
+    }
+    
+    .panel_toolbox>li {
+        color: green;
+    }
+    
+    .panel_toolbox>li>a {
+        padding: 5px;
+        color: #ffffff;
+        background-color: #2C3E50;
+        border-color: #2C3E50;
+        font-size: 14px;
+    }
+    
+    .panel_toolbox>li>a:hover {
+        color: #ffffff;
+        background-color: #2C3E50;
+    }
+
+</style>
+{% endblock%}
+<div class="x_title">
+    <h2>All Public Wishes</h2>
+    <ul class="nav navbar-right panel_toolbox">
+        <li>
+            {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith%}
+        </li>
+
+    </ul>
+
+    <div class="clearfix"></div>
+</div>
+<div class="col-md-8 col-sm-8 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Recently Added Wishes</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    {% if wish_per_page.has_prev %}<a href="{{ url_for('index', page=wish_per_page.prev_num) }} " class="btn blue-chambray"><i class="fa fa-backward"></i> Newer Wishes</a>{% else %}<button class="btn blue-chambray">Newer Wishes</button> {% endif %} </li>
+                <li>{% if wish_per_page.has_next %}<a href="{{ url_for('index', page=wish_per_page.next_num) }}" class="btn blue-chambray">Older Wishes <i class="fa fa-forward"></i></a>{% else %}<button class="btn blue-chambray">Older Wishes</button>{% endif %}
+                </li>
+
+            </ul>
+            <div class="clearfix"></div>
+
+
+
+        </div>
+        <div class="x_content">
+            <ul class="list-unstyled timeline">
+                {% if wish_per_page %} {% for wish in wish_per_page.items %}
+                <li>
+                    <div class="block">
+                        <div class="tags">
+                            <span class="image">
+                                <img src="{{ wish.image_url }}" alt="{{ wish.image_filename }}">
+<!--                          <img src="../static/images/img.jpg" alt="img">-->
+                        </span>
+                        </div>
+
+                        <div class="block_content">
+                            <h2 class="title">
+                                <a>{{ wish.title }}</a>
+                            </h2>
+                            <div class="byline">
+                                <span>Posted {{ moment(wish.date).fromNow() }}</span> by <a>{{ wish.user.username }}</a>
+                            </div>
+                            <p class="excerpt">{{ wish.description|truncate(200, killwords = True) }}<a href="{{ url_for('wishdetails', wish_title=wish.title)}}">Read&nbsp;More</a> {% if wish.tags %} {% for tag in wish._tags %}
+                                <a href="#" class="btn btn-info btn-xs pull-right"><i class="fa fa-tag"></i>{{ tag }} </a> {% endfor%} {% else %}
+                                <li>
+                                    <a href="#" class="btn btn-info btn-xs pull-right"><i class="fa fa-tag"></i>No wish Tag.</a>
+
+                                </li>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                {% endfor%} {% else %}
+                <li>
+                    No wish added.
+                </li>
+                {% endif %}
+
+
+
+            </ul>
+
+        </div>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2><i class="fa fa-align-left"></i> WishList Tags</h2>
+
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="row">
+                <div class="col-md-12">
+                    {% if WishTags %} {% for tag in WishTags %}
+                    <div class="project_progress">
+                        <div class="progress progress_sm">
+                            <div class="progress-bar bg-orange" role="progressbar" data-transitiongoal="100" aria-valuenow="100" style="width: 100%;"></div>
+                        </div>
+                        <small><a href="#">{{ tag }} </a></small>
+                    </div>
+                    {% endfor%} {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

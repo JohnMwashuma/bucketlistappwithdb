@@ -1,0 +1,75 @@
+{% extends "base.html" %} {% block content %} {% block css %}
+<style>
+    img {
+        border-radius: 20px;
+    }
+
+</style>
+{% endblock%}
+<div class="x_title">
+    <h2>All Public Wishes</h2>
+
+    <div class="clearfix"></div>
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Wish Details</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            {% if wish_detail %}
+            <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                <div class="profile_img">
+                    <div id="crop-avatar">
+                        <!-- Current avatar -->
+                        <img class="img-responsive avatar-view" src="{{ wish_detail.image_url }}" alt="{{ wish_detail.image_filename }}">
+                    </div>
+                </div>
+
+                <br>
+
+                <!-- start skills -->
+
+
+                <!-- end of skills -->
+
+            </div>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+
+                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+
+                    <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+
+                            <!-- start recent activity -->
+                            <ul class="messages">
+                                <li>
+
+                                    <div class="message_wrapper">
+                                        <h4 class="heading">{{ wish_detail.title }}</h4>
+                                        <blockquote class="message">
+                                            {{ wish_detail.description }}
+                                        </blockquote>
+                                        <br>
+                                        <p class="url">
+
+                                            <span>Posted {{ moment(wish_detail.date).fromNow() }}</span> by <a>{{ wish_detail.user.username }}</a> {% if wish_detail.tags %} {% for tag in wish_detail._tags %} <a href="#" class="btn btn-info btn-xs pull-right"><i class="fa fa-tag"></i>{{ tag }} </a>{% endfor%} {% endif %} {% if wish_detail.wish_progress == 1 %}
+                                            <a href="#" class="btn btn-success btn-xs pull-right"><i class="fa fa-check-circle-o"></i> Complete</a> {% else %}
+                                            <a href="#" class="btn btn-danger btn-xs pull-right"><i class="fa fa-times-circle"></i> Incomplete</a> {% endif %}
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!-- end recent activity -->
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

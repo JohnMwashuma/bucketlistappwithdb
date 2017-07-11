@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Bucketlist | Login</title>
+
+    <!-- Bootstrap -->
+    <link href="https://colorlib.com/polygon/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://colorlib.com/polygon/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="https://colorlib.com/polygon/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="https://colorlib.com/polygon/vendors/animate.css/animate.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="https://colorlib.com/polygon/build/css/custom.min.css" rel="stylesheet">
+</head>
+
+<body class="login">
+    <div>
+        <a class="hiddenanchor" id="signup"></a>
+        <a class="hiddenanchor" id="signin"></a>
+
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+                <section class="login_content">
+                    <form action="" method="post">
+                        <!-- Prevents CSRF -->
+                        {{ form.hidden_tag() }}
+                        <h1>Create Account</h1>
+                        <span style='color:red;'>
+                             {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith%}
+                        </span>
+                        <div>
+                            {% if form.username.errors %}{% endif %} {{ form.username( placeholder="Username", required="", class="form-control" ) }} {% for error in form.username.errors %} {{ error }} {% endfor %}
+                        </div>
+                        <div>
+                            {% if form.email.errors %}{% endif %} {{ form.email(type="email", placeholder="Email", required="", class="form-control" ) }} {% for error in form.email.errors %} {{ error }} {% endfor %}
+                        </div>
+                        <div>
+                            {% if form.password.errors %}{% endif %} {{ form.password(type="password", placeholder="Password", required="", class="form-control" ) }} {% for error in form.password.errors %} {{ error }} {% endfor %}
+                        </div>
+                        <div>
+                            {% if form.password2.errors %}{% endif %} {{ form.password2(type="password", placeholder="Confirm Password", required="", class="form-control" ) }} {% for error in form.password2.errors %} {{ error }} {% endfor %}
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-default">Register</button>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="separator">
+                            <p class="change_link">Already a member ?
+                                <a href="/login" class="to_register"> Log in </a>
+                            </p>
+
+                            <div class="clearfix"></div>
+                            <br />
+
+                            <div>
+                                <h1><i class="fa fa-shopping-cart"></i> Bucketlist </h1>
+                                <p>©2017 All Rights Reserved. Bucketlist. Privacy and Terms</p>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
