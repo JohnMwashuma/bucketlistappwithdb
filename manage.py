@@ -1,7 +1,7 @@
 from bucketlist import app, db
 from models import User, Wishes, Tag
-from flask.ext.script import Manager, prompt_bool
-from flask.ext.migrate import Migrate, MigrateCommand
+from flask_script import Manager, prompt_bool
+from flask_migrate import Migrate, MigrateCommand
 
 manager = Manager(app)
 migrate = Migrate(app, db)
