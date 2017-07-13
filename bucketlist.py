@@ -18,9 +18,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '\x0c\x07\xbb\xf6\x9c\xbb\xb6NFN\x84fIq\xb3}\xb0\xb00\x01\xc0\x9cih'
 
 # Database Configuration
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'bucketlist.db')
-app.config['DEBUG'] = True
-heroku = Heroku(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'bucketlist.db')
+#app.config['DEBUG'] = True
+#heroku = Heroku(app)
 db = SQLAlchemy(app)
 
 # Configuring Authentication
